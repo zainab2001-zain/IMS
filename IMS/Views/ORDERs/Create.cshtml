@@ -1,0 +1,352 @@
+﻿@model IMS.ORDER
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_sidePanelPage.cshtml";
+    Inventory_Management_SystemEntities db = new Inventory_Management_SystemEntities();
+}
+
+<br />
+<div class="row">
+    <div class="col-md-5 order-md-2 mb-4">
+        <h4 class="mb-3">Billing Information</h4>
+        <form class="needs-validation" novalidate="">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="firstName">Account No.</label>
+                    <input type="text" class="form-control" id="txt_AccountNumber" placeholder="" value="" required >
+                </div>
+            </div>
+
+            @*<div class="mb-3">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"></span>
+                        </div>
+                        <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your username is required.
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="mb-3">
+                <label for="email">Payment Type</label>
+                <select class="form-control" id="PType">
+                    <option value="Cashier">Cashier</option>
+                    <option value="Supplier">Supplier</option>
+
+                </select> 
+            </div>
+
+            <div class="mb-3">
+                <label for="address">Is Paid</label>
+                <select class="form-control" id="IsPaid">
+                    <option value="1">Paid</option>
+                    <option value="0">Not Paid</option>
+
+                </select>
+            </div>
+
+            @*<div class="mb-3">
+                    <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5 mb-3">
+                        <label for="country">Country</label>
+                        <select class="custom-select d-block w-100" id="country" required="">
+                            <option value="">Choose...</option>
+                            <option>United States</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid country.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="state">State</label>
+                        <select class="custom-select d-block w-100" id="state" required="">
+                            <option value="">Choose...</option>
+                            <option>California</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please provide a valid state.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="zip">Zip</label>
+                        <input type="text" class="form-control" id="zip" placeholder="" required="">
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="same-address">
+                    <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="save-info">
+                    <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                </div>
+                <hr class="mb-4">
+
+                <h4 class="mb-3">Payment</h4>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                        <label class="custom-control-label" for="credit">Credit card</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                        <label class="custom-control-label" for="debit">Debit card</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                        <label class="custom-control-label" for="paypal">Paypal</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-name">Name on card</label>
+                        <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+                        <small class="text-muted">Full name as displayed on card</small>
+                        <div class="invalid-feedback">
+                            Name on card is required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-number">Credit card number</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                        <div class="invalid-feedback">
+                            Credit card number is required
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="cc-expiration">Expiration</label>
+                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+                        <div class="invalid-feedback">
+                            Expiration date required
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="cc-expiration">CVV</label>
+                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                        <div class="invalid-feedback">
+                            Security code required
+                        </div>
+                    </div>
+                </div>
+            *@
+            <hr class="mb-4">
+            <button id="placeOrder" class="btn btn-primary btn-lg btn-block" type="button">Place Order</button>
+        </form>
+
+    </div>
+    <div class="col-md-7 order-md-1 form-group">
+        <label class="d-flex justify-content-between align-items-center mb-3">Select Product</label>
+        <select class="form-control" id="products">
+            @foreach (var product in db.PRODUCTs.OrderBy(p => p.Product_Name).ToList())
+            {
+                <option value="@product.Product_ID">@product.Product_Name</option>
+            }
+        </select>
+
+        <br />
+
+        <label class="d-flex justify-content-between align-items-center mb-3">Enter Quantity</label>
+
+        <input type="text" class="form-control" id="quantity" />
+
+        <br />
+
+        <input type="button" class="btn btn-primary" value="Add Product" id="Btn_AddProduct" />
+
+        <br />
+
+        <table class="tg table table-striped" id="ProductTable">
+            <thead>
+                <tr>
+                    <th style="display:none">Product ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+
+            @*@for (int i = 0; i < 3; i++)
+                {
+                    <tr>
+                        <th>Intel Processor</th>
+                        <th>15000</th>
+                        <th>3</th>
+                        <th>45000</th>
+                        <th>Actions</th>
+                    </tr>
+                }*@
+        </table>
+
+        @*<ul class="list-group mb-3">
+            @foreach (var product in Model.CartProducts)
+            {
+                var productQuantity = Model.CartProductIds.Where(productId => productId == product.ID).Count();
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div style="float:left">
+                        <h4 class="my-0">@counter) @product.Name Qty - (@productQuantity)</h4>
+                        <small class="text-muted">@(@product.Description.Length >= 100 ? @product.Description.Substring(0, 99) : product.Description)</small>
+                    </div>
+                    <span class="text-muted"> Unit Price: $ @product.Price Total Price: $ @(product.Price * productQuantity)</span>
+
+
+                </li>
+                counter++;
+            }
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total (USD)</span>
+                    <strong>$ @Model.CartProducts.Sum(x => x.Price * Model.CartProductIds.Where(productId => productId == x.ID).Count())</strong>
+                </li>
+                </ul>
+
+                @*<form class="card p-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Promo code">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                    </div>
+                </div>
+            </form>*@
+    </div>
+
+</div>
+
+
+
+@section scripts{
+
+    <script>
+
+
+        $('#Btn_AddProduct').click(function () {
+            var productID = $('#products').val();
+            var productName = $('#products option:selected').text();
+            var productQuantity = $('#quantity').val();
+
+            $.ajax({
+                url: '../ORDERs/GetPrice',
+                type: 'POST',
+                data: {
+                    productID: productID
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data == "") {
+                        alert("Oops! something went wrong");
+                    }
+                    else {
+
+                        $('#ProductTable tbody').append("<tr><td style='display:none'>" + productID + "</td><td>" + productName + "</td><td>" + data + "</td><td>" + productQuantity + "</td><td>" + (parseInt(data) * parseInt(productQuantity)) + "</td><td><input type='button' class='btn btn-danger' value='Remove' onclick='Remove(this);' /></td></tr>");
+                    }
+
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+
+        });
+
+        function Remove(control) {
+            alert("function called");
+            $(control).parents("tr").remove();
+        }
+
+
+        $('#placeOrder').click(function () {
+            var accNo = $('#txt_AccountNumber').val();
+            var PaymentType = $('#PType').val();
+            var IsPaid = $('#IsPaid').val();
+            var productIDs = [];
+            var productQty = [];
+
+            var myTab = document.getElementById('ProductTable');
+
+            for (i = 1; i < myTab.rows.length; i++) {
+
+                var objCells = myTab.rows.item(i).cells;
+
+                for (var j = 0; j < objCells.length; j++) {
+                    if (j == 0) {
+                        productIDs.push(objCells.item(j).innerHTML);
+                    }
+                    else if (j == 3) {
+                        productQty.push(objCells.item(j).innerHTML);
+                    }
+                }
+
+            }
+            
+            console.log(productIDs);
+            console.log(productQty);
+
+
+            $.ajax({
+                url: '../ORDERs/PlaceOrder',
+                type: 'POST',
+                data: {
+                    accountNo: accNo,
+                    PaymentType: PaymentType,
+                    IsPaid: IsPaid,
+                    Ids: productIDs,
+                    Qty: productQty
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.indexOf("success") != -1) {
+                        var ad = data.split('-')[1];
+                        alert("Order Placed");
+                        var Id = "";
+                        var qty = "";
+
+                        for (var i = 0; i < productIDs.length; i++) {
+                            Id += productIDs[i] + ",";
+                        }
+                        for (var i = 0; i < productQty.length; i++) {
+                            qty += productQty[i] + ",";
+                        }
+                        window.location = '../ORDERs/GeneratePDF?orderNo=' + ad + '&accountNo=' + accNo + '&PaymentType=' + PaymentType + '&IsPaid=' + IsPaid + '&Ids=' + Id + '&Qty=' + qty;
+                    }
+                    else {
+                        alert("Oops! something went wrong");
+                    }
+
+                },
+                error: function (e) {
+                    console.log(e.responseText);
+                }
+            });
+
+
+
+        });
+      
+
+
+
+
+    </script>
+
+
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

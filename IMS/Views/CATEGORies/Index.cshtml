@@ -1,0 +1,34 @@
+﻿@model IEnumerable<IMS.CATEGORY>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_sidePanelPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p style="margin-top:20px;">
+    @Html.ActionLink("Add new CATEGORY", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Category_ID }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Category_ID }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Category_ID }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Inventory_Management_SystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Inventory_Management_SystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CATEGORies" EntityType="Inventory_Management_SystemModel.CATEGORY" />
+    <EntitySet Name="ORDERs" EntityType="Inventory_Management_SystemModel.ORDER" />
+    <EntitySet Name="ORDER_DETAIL" EntityType="Inventory_Management_SystemModel.ORDER_DETAIL" />
+    <EntitySet Name="PAYMENTs" EntityType="Inventory_Management_SystemModel.PAYMENT" />
+    <EntitySet Name="PRODUCTs" EntityType="Inventory_Management_SystemModel.PRODUCT" />
+    <EntitySet Name="PRODUCT_CATEGORY" EntityType="Inventory_Management_SystemModel.PRODUCT_CATEGORY" />
+    <EntitySet Name="PRODUCT_DETAILS" EntityType="Inventory_Management_SystemModel.PRODUCT_DETAILS" />
+    <EntitySet Name="ROLES" EntityType="Inventory_Management_SystemModel.ROLE" />
+    <EntitySet Name="SUPPLIERs" EntityType="Inventory_Management_SystemModel.SUPPLIER" />
+    <EntitySet Name="USERs" EntityType="Inventory_Management_SystemModel.USER" />
+    <AssociationSet Name="FK__PRODUCT_C__Categ__5535A963" Association="Inventory_Management_SystemModel.FK__PRODUCT_C__Categ__5535A963">
+      <End Role="CATEGORY" EntitySet="CATEGORies" />
+      <End Role="PRODUCT_CATEGORY" EntitySet="PRODUCT_CATEGORY" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER__ID__20C1E124" Association="Inventory_Management_SystemModel.FK__ORDER__ID__20C1E124">
+      <End Role="USER" EntitySet="USERs" />
+      <End Role="ORDER" EntitySet="ORDERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_DET__Order__267ABA7A" Association="Inventory_Management_SystemModel.FK__ORDER_DET__Order__267ABA7A">
+      <End Role="ORDER" EntitySet="ORDERs" />
+      <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_DET__Bill___276EDEB3" Association="Inventory_Management_SystemModel.FK__ORDER_DET__Bill___276EDEB3">
+      <End Role="PAYMENT" EntitySet="PAYMENTs" />
+      <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_DET__Produ__25869641" Association="Inventory_Management_SystemModel.FK__ORDER_DET__Produ__25869641">
+      <End Role="PRODUCT" EntitySet="PRODUCTs" />
+      <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SUPPLIER__Order___2A4B4B5E" Association="Inventory_Management_SystemModel.FK__SUPPLIER__Order___2A4B4B5E">
+      <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+      <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCT_C__Produ__5441852A" Association="Inventory_Management_SystemModel.FK__PRODUCT_C__Produ__5441852A">
+      <End Role="PRODUCT" EntitySet="PRODUCTs" />
+      <End Role="PRODUCT_CATEGORY" EntitySet="PRODUCT_CATEGORY" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCT_DETAILS_PRODUCT" Association="Inventory_Management_SystemModel.FK_PRODUCT_DETAILS_PRODUCT">
+      <End Role="PRODUCT" EntitySet="PRODUCTs" />
+      <End Role="PRODUCT_DETAILS" EntitySet="PRODUCT_DETAILS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCT_C__Produ__5629CD9C" Association="Inventory_Management_SystemModel.FK__PRODUCT_C__Produ__5629CD9C">
+      <End Role="PRODUCT_DETAILS" EntitySet="PRODUCT_DETAILS" />
+      <End Role="PRODUCT_CATEGORY" EntitySet="PRODUCT_CATEGORY" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USER__Role_ID__1367E606" Association="Inventory_Management_SystemModel.FK__USER__Role_ID__1367E606">
+      <End Role="ROLE" EntitySet="ROLES" />
+      <End Role="USER" EntitySet="USERs" />
+    </AssociationSet>
+    <FunctionImport Name="st_getLoginDetails" ReturnType="Collection(Inventory_Management_SystemModel.st_getLoginDetails_Result1)">
+      <Parameter Name="user" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="st_getRoleWRTuser" ReturnType="Collection(String)">
+      <Parameter Name="user" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="CATEGORY">
+    <Key>
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Category_ID" Type="Int32" Nullable="false" />
+    <Property Name="Category_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUCT_CATEGORY" Relationship="Inventory_Management_SystemModel.FK__PRODUCT_C__Categ__5535A963" FromRole="CATEGORY" ToRole="PRODUCT_CATEGORY" />
+  </EntityType>
+  <EntityType Name="ORDER">
+    <Key>
+      <PropertyRef Name="Order_ID" />
+    </Key>
+    <Property Name="Order_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_Of_Order" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ID" Type="Int32" />
+    <NavigationProperty Name="USER" Relationship="Inventory_Management_SystemModel.FK__ORDER__ID__20C1E124" FromRole="ORDER" ToRole="USER" />
+    <NavigationProperty Name="ORDER_DETAIL" Relationship="Inventory_Management_SystemModel.FK__ORDER_DET__Order__267ABA7A" FromRole="ORDER" ToRole="ORDER_DETAIL" />
+  </EntityType>
+  <EntityType Name="ORDER_DETAIL">
+    <Key>
+      <PropertyRef Name="Order_Detail_ID" />
+    </Key>
+    <Property Name="Order_Detail_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Unit_Price" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Product_ID" Type="Int32" />
+    <Property Name="Order_ID" Type="Int32" />
+    <Property Name="Bill_Number" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ORDER" Relationship="Inventory_Management_SystemModel.FK__ORDER_DET__Order__267ABA7A" FromRole="ORDER_DETAIL" ToRole="ORDER" />
+    <NavigationProperty Name="PAYMENT" Relationship="Inventory_Management_SystemModel.FK__ORDER_DET__Bill___276EDEB3" FromRole="ORDER_DETAIL" ToRole="PAYMENT" />
+    <NavigationProperty Name="PRODUCT" Relationship="Inventory_Management_SystemModel.FK__ORDER_DET__Produ__25869641" FromRole="ORDER_DETAIL" ToRole="PRODUCT" />
+    <NavigationProperty Name="SUPPLIERs" Relationship="Inventory_Management_SystemModel.FK__SUPPLIER__Order___2A4B4B5E" FromRole="ORDER_DETAIL" ToRole="SUPPLIER" />
+  </EntityType>
+  <EntityType Name="PAYMENT">
+    <Key>
+      <PropertyRef Name="Bill_Number" />
+    </Key>
+    <Property Name="Bill_Number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Total_Amount" Type="Int32" Nullable="false" />
+    <Property Name="Payment_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Paid" Type="Boolean" />
+    <Property Name="Account_Number" Type="Int32" />
+    <NavigationProperty Name="ORDER_DETAIL" Relationship="Inventory_Management_SystemModel.FK__ORDER_DET__Bill___276EDEB3" FromRole="PAYMENT" ToRole="ORDER_DETAIL" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="Product_ID" />
+    </Key>
+    <Property Name="Product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ORDER_DETAIL" Relationship="Inventory_Management_SystemModel.FK__ORDER_DET__Produ__25869641" FromRole="PRODUCT" ToRole="ORDER_DETAIL" />
+    <NavigationProperty Name="PRODUCT_CATEGORY" Relationship="Inventory_Management_SystemModel.FK__PRODUCT_C__Produ__5441852A" FromRole="PRODUCT" ToRole="PRODUCT_CATEGORY" />
+    <NavigationProperty Name="PRODUCT_DETAILS" Relationship="Inventory_Management_SystemModel.FK_PRODUCT_DETAILS_PRODUCT" FromRole="PRODUCT" ToRole="PRODUCT_DETAILS" />
+  </EntityType>
+  <EntityType Name="PRODUCT_CATEGORY">
+    <Key>
+      <PropertyRef Name="Product_Category_ID" />
+    </Key>
+    <Property Name="Product_Category_ID" Type="Int32" Nullable="false" />
+    <Property Name="Product_ID" Type="Int32" />
+    <Property Name="Category_ID" Type="Int32" />
+    <Property Name="Product_Detail_ID" Type="Int32" />
+    <NavigationProperty Name="CATEGORY" Relationship="Inventory_Management_SystemModel.FK__PRODUCT_C__Categ__5535A963" FromRole="PRODUCT_CATEGORY" ToRole="CATEGORY" />
+    <NavigationProperty Name="PRODUCT" Relationship="Inventory_Management_SystemModel.FK__PRODUCT_C__Produ__5441852A" FromRole="PRODUCT_CATEGORY" ToRole="PRODUCT" />
+    <NavigationProperty Name="PRODUCT_DETAILS" Relationship="Inventory_Management_SystemModel.FK__PRODUCT_C__Produ__5629CD9C" FromRole="PRODUCT_CATEGORY" ToRole="PRODUCT_DETAILS" />
+  </EntityType>
+  <EntityType Name="PRODUCT_DETAILS">
+    <Key>
+      <PropertyRef Name="Product_Detail_ID" />
+    </Key>
+    <Property Name="Product_Detail_ID" Type="Int32" Nullable="false" />
+    <Property Name="Product_Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Product_Price" Type="Int32" Nullable="false" />
+    <Property Name="Product_Discount" Type="Int32" />
+    <Property Name="Product_Sold" Type="Int32" />
+    <Property Name="Product_Avaliable" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <NavigationProperty Name="PRODUCT" Relationship="Inventory_Management_SystemModel.FK_PRODUCT_DETAILS_PRODUCT" FromRole="PRODUCT_DETAILS" ToRole="PRODUCT" />
+    <NavigationProperty Name="PRODUCT_CATEGORY" Relationship="Inventory_Management_SystemModel.FK__PRODUCT_C__Produ__5629CD9C" FromRole="PRODUCT_DETAILS" ToRole="PRODUCT_CATEGORY" />
+  </EntityType>
+  <EntityType Name="ROLE">
+    <Key>
+      <PropertyRef Name="Role_ID" />
+    </Key>
+    <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="USERs" Relationship="Inventory_Management_SystemModel.FK__USER__Role_ID__1367E606" FromRole="ROLE" ToRole="USER" />
+  </EntityType>
+  <EntityType Name="SUPPLIER">
+    <Key>
+      <PropertyRef Name="Supplier_ID" />
+    </Key>
+    <Property Name="Supplier_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Province" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Order_Detail_ID" Type="Int32" />
+    <Property Name="Is_Supplied" Type="Boolean" />
+    <NavigationProperty Name="ORDER_DETAIL" Relationship="Inventory_Management_SystemModel.FK__SUPPLIER__Order___2A4B4B5E" FromRole="SUPPLIER" ToRole="ORDER_DETAIL" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="User_Name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CNIC" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Byte" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+    <Property Name="Role_ID" Type="Int32" />
+    <NavigationProperty Name="ORDERs" Relationship="Inventory_Management_SystemModel.FK__ORDER__ID__20C1E124" FromRole="USER" ToRole="ORDER" />
+    <NavigationProperty Name="ROLE" Relationship="Inventory_Management_SystemModel.FK__USER__Role_ID__1367E606" FromRole="USER" ToRole="ROLE" />
+  </EntityType>
+  <Association Name="FK__PRODUCT_C__Categ__5535A963">
+    <End Type="Inventory_Management_SystemModel.CATEGORY" Role="CATEGORY" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.PRODUCT_CATEGORY" Role="PRODUCT_CATEGORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORY">
+        <PropertyRef Name="Category_ID" />
+      </Principal>
+      <Dependent Role="PRODUCT_CATEGORY">
+        <PropertyRef Name="Category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER__ID__20C1E124">
+    <End Type="Inventory_Management_SystemModel.USER" Role="USER" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.ORDER" Role="ORDER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORDER">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_DET__Order__267ABA7A">
+    <End Type="Inventory_Management_SystemModel.ORDER" Role="ORDER" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.ORDER_DETAIL" Role="ORDER_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDER">
+        <PropertyRef Name="Order_ID" />
+      </Principal>
+      <Dependent Role="ORDER_DETAIL">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_DET__Bill___276EDEB3">
+    <End Type="Inventory_Management_SystemModel.PAYMENT" Role="PAYMENT" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.ORDER_DETAIL" Role="ORDER_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAYMENT">
+        <PropertyRef Name="Bill_Number" />
+      </Principal>
+      <Dependent Role="ORDER_DETAIL">
+        <PropertyRef Name="Bill_Number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_DET__Produ__25869641">
+    <End Type="Inventory_Management_SystemModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.ORDER_DETAIL" Role="ORDER_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="Product_ID" />
+      </Principal>
+      <Dependent Role="ORDER_DETAIL">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SUPPLIER__Order___2A4B4B5E">
+    <End Type="Inventory_Management_SystemModel.ORDER_DETAIL" Role="ORDER_DETAIL" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.SUPPLIER" Role="SUPPLIER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDER_DETAIL">
+        <PropertyRef Name="Order_Detail_ID" />
+      </Principal>
+      <Dependent Role="SUPPLIER">
+        <PropertyRef Name="Order_Detail_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCT_C__Produ__5441852A">
+    <End Type="Inventory_Management_SystemModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.PRODUCT_CATEGORY" Role="PRODUCT_CATEGORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="Product_ID" />
+      </Principal>
+      <Dependent Role="PRODUCT_CATEGORY">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCT_DETAILS_PRODUCT">
+    <End Type="Inventory_Management_SystemModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.PRODUCT_DETAILS" Role="PRODUCT_DETAILS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="Product_ID" />
+      </Principal>
+      <Dependent Role="PRODUCT_DETAILS">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCT_C__Produ__5629CD9C">
+    <End Type="Inventory_Management_SystemModel.PRODUCT_DETAILS" Role="PRODUCT_DETAILS" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.PRODUCT_CATEGORY" Role="PRODUCT_CATEGORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT_DETAILS">
+        <PropertyRef Name="Product_Detail_ID" />
+      </Principal>
+      <Dependent Role="PRODUCT_CATEGORY">
+        <PropertyRef Name="Product_Detail_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__USER__Role_ID__1367E606">
+    <End Type="Inventory_Management_SystemModel.ROLE" Role="ROLE" Multiplicity="0..1" />
+    <End Type="Inventory_Management_SystemModel.USER" Role="USER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLE">
+        <PropertyRef Name="Role_ID" />
+      </Principal>
+      <Dependent Role="USER">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="st_getLoginDetails_Result1">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="35" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="32" />
+  </ComplexType>
+</Schema>

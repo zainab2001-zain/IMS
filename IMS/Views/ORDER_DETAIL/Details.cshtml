@@ -1,0 +1,83 @@
+﻿@model IMS.ORDER_DETAIL
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_sidePanelPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ORDER_DETAIL</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ORDER.Order_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ORDER.Order_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PAYMENT.Payment_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PAYMENT.Payment_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCT.Product_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCT.Product_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Order_Detail_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

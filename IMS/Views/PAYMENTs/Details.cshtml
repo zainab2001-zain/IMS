@@ -1,0 +1,43 @@
+﻿@model IMS.PAYMENT
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_sidePanelPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PAYMENT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Total_Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total_Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Payment_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payment_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account_Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account_Number)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Bill_Number }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0620ece9162d403794f1e769dbe97777" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.CATEGORY" Width="1.5" PointX="3" PointY="10.25" />
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.ORDER" Width="1.5" PointX="0.75" PointY="10.375" />
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.ORDER_DETAIL" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.PAYMENT" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.PRODUCT" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.PRODUCT_CATEGORY" Width="1.5" PointX="5.25" PointY="9.875" />
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.PRODUCT_DETAILS" Width="1.5" PointX="3" PointY="12.75" />
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.ROLE" Width="1.5" PointX="1.5" PointY="22.625" />
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.SUPPLIER" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="Inventory_Management_SystemModel.USER" Width="1.5" PointX="1.5" PointY="17.125" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK__PRODUCT_C__Categ__5535A963" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK__ORDER__ID__20C1E124" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK__ORDER_DET__Order__267ABA7A" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK__ORDER_DET__Bill___276EDEB3" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK__ORDER_DET__Produ__25869641" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK__SUPPLIER__Order___2A4B4B5E" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK__PRODUCT_C__Produ__5441852A" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK_PRODUCT_DETAILS_PRODUCT" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK__PRODUCT_C__Produ__5629CD9C" />
+        <AssociationConnector Association="Inventory_Management_SystemModel.FK__USER__Role_ID__1367E606" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

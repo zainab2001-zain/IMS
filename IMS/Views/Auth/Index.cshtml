@@ -1,0 +1,38 @@
+﻿@model IMS.USER
+
+@{
+    ViewBag.Title = "Pixel Login | Inventory Manaagement System";
+    Layout = "~/Views/Shared/_SigninLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-input">
+
+            @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @class = "form-control col-md-12 col-sm-12 col-lg-12" } })
+            @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+
+        </div>
+
+
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-input">
+
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control col-md-12 col-sm-12 col-lg-12"  ,type = "password" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+        </div>
+               
+
+        <input type="submit" value="LOG IN"  class="btn-lg btn-success  col-md-12 col-lg-12  col-sm-12 mt-2" style="background-color: #00d679;" />
+
+
+    </div>
+</div>
+}

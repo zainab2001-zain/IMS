@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/simple-sidebar.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Style -->
+    <link href="~/Content/css/Site.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <!-- login form -->
+    <section class="w3l-login">
+        <div class="overlay">
+            <div class="wrapper">
+                <div class="logo">
+                    <a class="brand-logo" href="~/Auth/Index">IMS login form</a>
+                </div>
+                <div class="form-section">
+                    <h3>Login</h3>
+                    <h6>To continue with Us</h6>
+                    <form action="#" method="post" class="signin-form">
+                        <div>
+                            @RenderBody()
+                        </div>
+                        <label class="check-remaind">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            <p class="remember">Remember me</p>
+                        </label>
+                       
+                        <div class="new-signup">
+                            <a href="#reload" class="signuplink">Forgot username or password?</a>
+                        </div>
+                    </form>
+                    <p class="signup">Don’t have account yet? <a href="#signup.html" class="signuplink">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+
+       
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
+
+        <!-- copyright -->
+        <div class="copy-right" style="margin-top:15px">
+            <p>&copy;<a> IMS PAFKIET Login Form. All rights reserved | Design by Shaista Talib Husnain</a></p>
+        </div>
+        <!-- //copyright -->
+    </section>
+
+    <!-- /login form -->
+</body>
+</html>
